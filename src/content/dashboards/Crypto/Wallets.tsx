@@ -71,7 +71,6 @@ function Wallets() {
         const walletAddress = await signer.getAddress().then(result => result)
         console.log(walletAddress)
         setClementWalletAddress(walletAddress)
-
       }
     };
 
@@ -107,7 +106,7 @@ function Wallets() {
           </Typography>
           <Box
             sx={{
-              pt: 2.5
+              pt: 5.5
             }}
           >
             <Typography variant="h3" gutterBottom noWrap>

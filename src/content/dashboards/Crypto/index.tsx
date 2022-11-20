@@ -8,7 +8,8 @@ import AccountBalance from './AccountBalance';
 import Wallets from './Wallets';
 import CMMDFunctions from './CMMDFunctions';
 import Oracle from './Oracle';
-import WatchList from './WatchList';
+import Tools from './Tools';
+
 function DashboardCrypto() {
   return (
     <>
@@ -32,10 +33,11 @@ function DashboardCrypto() {
           <Grid item lg={6} xs={12}>
             <CMMDFunctions />
           </Grid>
-          <Grid item lg={8} xs={12}>
+          <Grid item lg={6} xs={12}>
             <Oracle />
           </Grid>
-          <Grid item lg={4} xs={12}>
+          <Grid item lg={6} xs={12}>
+            <Tools/>
           </Grid>
         </Grid>
       </Container>

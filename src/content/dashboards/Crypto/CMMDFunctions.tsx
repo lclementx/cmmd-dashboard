@@ -45,37 +45,7 @@ function CMMDFunctions() {
     console.log(updateMarketPrice);
   };
 
-  // const requestHeaders = new Headers();
-  // requestHeaders.set("Access-Control-Allow-Origin", "*");
-  // requestHeaders.set("Access-Control-Allow-Headers", "X-Requested-With")
-  const getData = async () => {
-      const res = await axios.get(cpi_url);
-      console.log(res)
-  };
-
   const [loading, setLoading] = useState(true);
-
-  const onLoad = useEffect(() => {
-    const invokeMetaMask = async () => {
-      if (loading == true) {
-        // get provider and signer
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        await provider.send("eth_requestAccounts", []);
-        const signer = await provider.getSigner();
-
-        // fetch abi
-        const abi = JSON.parse(JSON.stringify(abi_json));
-
-        // create contract instance
-        const contractAddress = "0x566Bf25BA5ff47fBF179977b4CC8d8cF23fC76eF";
-        const contract = new ethers.Contract(contractAddress, abi, signer);
-
-        setLoading(false)
-      }
-    };
-
-    invokeMetaMask().catch(console.error);
-  })
 
   const updateCPI = useCallback( async (value) => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -104,7 +74,7 @@ function CMMDFunctions() {
     await provider.send("eth_requestAccounts", []);
     const signer = await provider.getSigner();
     const abi = JSON.parse(JSON.stringify(cmmdPolicyABI_json));
-    const policyAddress = "0xBc9e50fD908317ccbF9C4050a160D667F41729E5";
+    const policyAddress = "0xfa04fBe38ade87544253C013A136F61AeF72569A";
     const policyContract = new ethers.Contract(policyAddress, abi, signer);
     const res = await policyContract.rebase()
     console.log(res)
