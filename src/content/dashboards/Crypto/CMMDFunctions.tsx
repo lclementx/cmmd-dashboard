@@ -13,34 +13,19 @@ import {
   Avatar,
   styled
 } from '@mui/material';
-import LockTwoToneIcon from '@mui/icons-material/LockTwoTone';
 import RefreshTwoToneIcon from '@mui/icons-material/RefreshTwoTone';
 import Text from 'src/components/Text';
-import { ethers } from "ethers";
+import { ethers, FixedNumber } from "ethers";
 declare let window: any;
 var abi_json = require('./abi.json');
 var orcaleabi_json = require('./oracleABI.json');
 var cmmdPolicyABI_json = require('./cmmdPolicyABI.json');
 const factor = 10**18
 
-const AvatarWrapperError = styled(Avatar)(
-  ({ theme }) => `
-      background-color: ${theme.colors.error.lighter};
-      color:  ${theme.colors.error.main};
-`
-);
-
 const AvatarWrapperSuccess = styled(Avatar)(
   ({ theme }) => `
       background-color: ${theme.colors.success.lighter};
       color:  ${theme.colors.success.main};
-`
-);
-
-const AvatarWrapperWarning = styled(Avatar)(
-  ({ theme }) => `
-      background-color: ${theme.colors.warning.lighter};
-      color:  ${theme.colors.warning.main};
 `
 );
 
@@ -100,7 +85,7 @@ function CMMDFunctions() {
     const oracleAddress = "0xb31fFa2e5d501F9f606Ff4A5F3E5E281394f7C60";
     const cpiOracle = new ethers.Contract(oracleAddress, abi, signer);
     const entryValue = parseFloat(value.updateCPIValue)
-    const res = await cpiOracle.pushReport(entryValue.toString())
+    const res = await cpiOracle.pushReport(FixedNumber.fromString(entryValue.toString()))
   },[]);
 
   const updateMarketPriceManually = useCallback( async (value) => {
@@ -118,10 +103,11 @@ function CMMDFunctions() {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     await provider.send("eth_requestAccounts", []);
     const signer = await provider.getSigner();
-    const abi = JSON.parse(JSON.stringify(orcaleabi_json));
+    const abi = JSON.parse(JSON.stringify(cmmdPolicyABI_json));
     const policyAddress = "0xBc9e50fD908317ccbF9C4050a160D667F41729E5";
     const policyContract = new ethers.Contract(policyAddress, abi, signer);
     const res = await policyContract.rebase()
+    console.log(res)
   },[]);
 
   return (

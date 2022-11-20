@@ -109,7 +109,7 @@ import {
           const cpi = await cpiOracle.getData().then(result => result[0]._hex) //First result is the value
 
           const marketPrice = parseInt(String(market), 16) / factor
-          const cpiValue = parseInt(String(cpi), 16)
+          const cpiValue = parseInt(String(cpi), 16) / factor
           setLoading(false);
           setMarketData(marketPrice)
           setCPIData(cpiValue)

@@ -1,7 +1,6 @@
 import {
   Button,
   Card,
-  Grid,
   Box,
   CardContent,
   Typography,
@@ -28,10 +27,9 @@ const AvatarWrapper = styled(Avatar)(
     border-radius: 60px;
     height: ${theme.spacing(5.5)};
     width: ${theme.spacing(5.5)};
-    background: ${
-      theme.palette.mode === 'dark'
-        ? theme.colors.alpha.trueWhite[30]
-        : alpha(theme.colors.alpha.black[100], 0.0)
+    background: ${theme.palette.mode === 'dark'
+      ? theme.colors.alpha.trueWhite[30]
+      : alpha(theme.colors.alpha.black[100], 0.0)
     };
   
     img {
@@ -45,39 +43,6 @@ const AvatarWrapper = styled(Avatar)(
 `
 );
 
-const AvatarAddWrapper = styled(Avatar)(
-  ({ theme }) => `
-        background: ${theme.colors.alpha.black[10]};
-        color: ${theme.colors.primary.main};
-        width: ${theme.spacing(8)};
-        height: ${theme.spacing(8)};
-`
-);
-
-const CardAddAction = styled(Card)(
-  ({ theme }) => `
-        border: ${theme.colors.primary.main} dashed 1px;
-        height: 100%;
-        color: ${theme.colors.primary.main};
-        transition: ${theme.transitions.create(['all'])};
-        
-        .MuiCardActionArea-root {
-          height: 100%;
-          justify-content: center;
-          align-items: center;
-          display: flex;
-        }
-        
-        .MuiTouchRipple-root {
-          opacity: .2;
-        }
-        
-        &:hover {
-          border-color: ${theme.colors.alpha.black[70]};
-        }
-`
-);
-  
 function Wallets() {
   const [clementBalance, setClementBalance] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -100,14 +65,13 @@ function Wallets() {
 
         // check balance
         const balance = await contract.balanceOf(await signer.getAddress());
-        const decimalBalance = parseInt(String(balance._hex), 16)
         const normalizedBalance = (parseInt(String(balance._hex), 16) / (10 ** 18)).toFixed(10)
         setClementBalance(parseFloat(normalizedBalance));
         setLoading(false);
         const walletAddress = await signer.getAddress().then(result => result)
         console.log(walletAddress)
         setClementWalletAddress(walletAddress)
-    
+
       }
     };
 
@@ -126,42 +90,35 @@ function Wallets() {
       >
         <Typography variant="h3">Wallet</Typography>
       </Box>
-      <Grid container spacing={3}>
-        <Grid xs={12} sm={4} md={12} item>
-          <Card
+      <Card
+        sx={{
+          px: 1
+        }}
+      >
+        <CardContent>
+          <AvatarWrapper>
+            <img
+              alt="CMMD"
+              src="/static/images/placeholders/logo/CMMD-Logo.png"
+            />
+          </AvatarWrapper>
+          <Typography variant="h5" noWrap>
+            {clementWalletAddress}
+          </Typography>
+          <Box
             sx={{
-              px: 1
+              pt: 2.5
             }}
           >
-            <CardContent>
-              <AvatarWrapper>
-                <img
-                  alt="CMMD"
-                  src="/static/images/placeholders/logo/CMMD-Logo.png"
-                />
-              </AvatarWrapper>
-              <Typography variant="h5" noWrap>
-                Clement
-              </Typography>
-              <Typography variant="subtitle1" noWrap>
-                {clementWalletAddress}
-              </Typography>
-              <Box
-                sx={{
-                  pt: 2.5
-                }}
-              >
-                <Typography variant="h3" gutterBottom noWrap>
-                {clementBalance} CMMD
-                </Typography>
-                <Typography variant="subtitle2" noWrap>
-                  {clementBalance} CMMD
-                </Typography>
-              </Box>
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
+            <Typography variant="h3" gutterBottom noWrap>
+              {clementBalance} CMMD
+            </Typography>
+            <Typography variant="subtitle2" noWrap>
+              {clementBalance} CMMD
+            </Typography>
+          </Box>
+        </CardContent>
+      </Card>
     </>
   );
 }
