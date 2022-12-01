@@ -36,3 +36,12 @@ CMMD Dashboard: https://extraordinary-pegasus-5a3b86.netlify.app/
     <li>Faucet Address: 0x6A525C3CADf3e866a8AedcA9554266939386D709</li>
 </ol>
 
+---
+
+<h2>
+    Etherdata Test Chain Info
+</h2>
+
+Etherdata Testnet Connection: https://docs.msbd5017.etdchain.net/Chapter1/rpc#network-details
+Etherdata Testnet Stats: https://stats.debugchain.net/tx
+
