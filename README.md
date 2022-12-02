@@ -6,9 +6,12 @@ Used the free template from https://github.com/bloomui/tokyo-free-white-react-ad
     <li>Total Supply</li>
     <li>Orcale Prices</li>
     <li>Functionalities to Update Prices and Rebase Supply</li>
+    <li>Tools: Rebase Percentage Calculator, Faucet</li>
 </ol>
 
 CMMD Dashboard: https://extraordinary-pegasus-5a3b86.netlify.app/
+
+For using the Faucet, please add the token into your wallet by using the CMMD Token Address mentioned below. Otherwise the token might not appear by default given its not a traded token and it currently lives in the testnet.
 </p>
 
 ---
